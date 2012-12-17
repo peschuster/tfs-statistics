@@ -1,0 +1,32 @@
+﻿<Controls:MetroWindow x:Class="TfsStatisticsWpf.ProjectSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="TFS Statistics" Height="424" Width="343" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" ShowIconOnTitleBar="False">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Label Content="TFS Projekt wählen..." FontSize="24" FontWeight="Normal" Foreground="DodgerBlue" Height="43" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="Auto" FontFamily="{DynamicResource HeaderFontFamily}" Margin="12,10,0,0" />
+        <ListView Height="285" HorizontalAlignment="Left" ItemsSource="{Binding Projects}" Margin="12,57,0,0" Name="lvProjects" VerticalAlignment="Top" Width="Auto" MouseDoubleClick="lvProjects_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" Width="40" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" Width="250" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Ok" Height="23" HorizontalAlignment="Left" Margin="235,348,0,0" Name="btnOk" VerticalAlignment="Top" Width="75" IsDefault="True" IsCancel="False" Click="btnOk_Click" />
+    </Grid>
+</Controls:MetroWindow>

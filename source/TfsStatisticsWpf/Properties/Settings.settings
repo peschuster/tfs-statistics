@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsStatisticsWpf.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TfsConnection" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MongoConnection" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mongodb://localhost</Value>
+    </Setting>
+    <Setting Name="DomainController" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DirectoryImageProperty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">thumbnailPhoto</Value>
+    </Setting>
+    <Setting Name="GraphiteHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GraphiteMetricFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">${baseKey}.${projectKey}.${author}.${type}_count</Value>
+    </Setting>
+    <Setting Name="GraphiteBaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">stats_counts.tfs</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

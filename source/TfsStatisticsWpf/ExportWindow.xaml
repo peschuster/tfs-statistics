@@ -1,0 +1,68 @@
+﻿<Controls:MetroWindow x:Class="TfsStatisticsWpf.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Export" Height="491" Width="1052" WindowStartupLocation="CenterOwner" Closing="OnClosing">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="Auto"  />
+            <ColumnDefinition Width="*"  />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DataGrid 
+            Name="gridChangesets" Grid.Column="0" xml:lang="de-DE" 
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            ItemsSource="{Binding Path=Changesets}" AutoGenerateColumns="False" 
+            Margin="0,0,0,35">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="" Binding="{Binding Path=Selected}" Width="15" IsReadOnly="False" />
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=Changeset.Id}" Width="55" IsReadOnly="True" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=Changeset.Datum, StringFormat='{}{0:d}'}" Width="70" IsReadOnly="True" />
+                <DataGridTextColumn Header="Author" Binding="{Binding Path=Changeset.Author}" Width="115" IsReadOnly="True" />
+                <DataGridTextColumn Header="Comment" Binding="{Binding Path=Changeset.Comment}" Width="200" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="btnSelectAll" Content="Select All" HorizontalAlignment="Left" Margin="5,0,5,5" VerticalAlignment="Bottom" Width="75" Click="OnSelectAllClick"/>
+        <Button Name="btnSelectNone" Content="Select None" HorizontalAlignment="Left" Margin="85,0,5,5" VerticalAlignment="Bottom" Width="75" Click="OnSelectNoneClick"/>
+        <TabControl Grid.Column="2">
+            <TabControl.Items>
+                <TabItem Header="Graphite">
+                    <Grid>
+                        <Label Content="Graphite Host" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="txbGraphiteUrl" HorizontalAlignment="Left" Height="23" Margin="123,20,0,0" TextWrapping="Wrap" Text="{Binding Path=Settings.GraphiteHost}" VerticalAlignment="Top" Width="356"/>
+
+                        <Label Content="Base Key" HorizontalAlignment="Left" Margin="19,90,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="txbBaseKey" HorizontalAlignment="Left" Height="23" Margin="123,90,0,0" TextWrapping="Wrap" Text="{Binding Path=Settings.GraphiteBaseKey}" VerticalAlignment="Top" Width="356"/>
+                        <Label Content="Project Key" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="txbProjectKey" HorizontalAlignment="Left" Height="23" Margin="123,120,0,0" TextWrapping="Wrap" Text="{Binding Path=GraphiteProjectKey}" VerticalAlignment="Top" Width="356"/>
+                        <Label Content="Metric Name" HorizontalAlignment="Left" Margin="19,150,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="txbMetricKey" HorizontalAlignment="Left" Height="23" Margin="123,150,0,0" TextWrapping="Wrap" Text="{Binding Path=Settings.GraphiteMetricFormat}" VerticalAlignment="Top" Width="356"/>
+                        <Button Name="btnExportGrphite" Content="Export" HorizontalAlignment="Right" Margin="0,0,20,50" VerticalAlignment="Bottom" Width="75" Click="OnExportGraphite"/>
+                        <ProgressBar Name="prgBarGraphite" HorizontalAlignment="Stretch" Margin="20,0,20,10" VerticalAlignment="Bottom" Height="30" Width="Auto"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="CSV">
+                    <Grid>
+                        <Label Content="Path" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="txbCsvPath" HorizontalAlignment="Left" Height="23" Margin="123,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="356"/>
+
+                        <Button Name="btnExportCsv" Content="Export" HorizontalAlignment="Right" Margin="0,0,20,50" VerticalAlignment="Bottom" Width="75"/>
+                        <ProgressBar HorizontalAlignment="Stretch" Margin="20,0,20,10" VerticalAlignment="Bottom" Height="30" Width="Auto"/>
+                    </Grid>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+        <GridSplitter 
+                    ResizeDirection="Columns"
+                    Grid.Column="1"
+                    Grid.Row="0" 
+                    Width="3"
+                    Height="Auto"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="0" />
+    </Grid>
+</Controls:MetroWindow>
