@@ -437,24 +437,23 @@ namespace TfsStatisticsWpf
 
         private async void OnLatestClicked(object sender, RoutedEventArgs e)
         {
-            var checkins = this.tfsConnector.GetLatestCheckins("$/", 20);
+            var checkins = this.tfsConnector.GetLatestCheckins("$/", 100);
 
-            var models = new List<ChangesetViewModel>();
-            foreach (Changeset checkin in checkins)
+            Func<Changeset, ChangesetViewModel> modelFactory = (Changeset checkin) =>
             {
                 Change change = checkin.Changes.FirstOrDefault();
 
                 if (change == null)
-                    continue;
+                    return null;
 
                 string projectName = change.Item.ServerItem.Split('/').Skip(1).First();
 
                 TeamProject project = this.Projects.FirstOrDefault(p => p.Name == projectName);
 
-                models.Add(new ChangesetViewModel(project, checkin, this.analystics.GetDiff(checkin, false)));
-            }
+                return new ChangesetViewModel(project, checkin, this.analystics.GetDiff(checkin, false));
+            };            
 
-            var window = new LatestWindow(models, this.GetUserModel);
+            var window = new LatestWindow(checkins.Select(modelFactory), this.GetUserModel);
             window.Show();
         }
     }

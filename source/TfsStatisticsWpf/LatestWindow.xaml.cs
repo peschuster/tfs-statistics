@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using Microsoft.TeamFoundation.VersionControl.Client;
 using TfsStatisticsWpf.Controls;
 using TfsStatisticsWpf.Models;
 
@@ -22,23 +23,38 @@ namespace TfsStatisticsWpf
     /// </summary>
     public partial class LatestWindow : MetroWindow
     {
+        private readonly IEnumerable<ChangesetViewModel> items;
+
+        private readonly Func<string, UserViewModel> userFactory;
+
+        private bool odd;
+
         public LatestWindow(IEnumerable<ChangesetViewModel> items, Func<string, UserViewModel> userFactory)
         {
+            this.userFactory = userFactory;
+            this.items = items;
+
             this.InitializeComponent();
 
-            bool odd = true;
-            foreach (var item in items)
+            this.scroller.InitialItemCount = 20;
+            this.scroller.Items = items;
+            this.scroller.ControlFactory = (object o) =>
             {
-                odd = !odd;
-                var control = new ChangesetControl(item, userFactory);
+                var item = o as ChangesetViewModel;
 
-                if (odd)
+                if (item == null)
+                    return null;
+
+                this.odd = !this.odd;
+                var control = new ChangesetControl(item, this.userFactory);
+
+                if (this.odd)
                 {
                     control.Background = new SolidColorBrush(Color.FromRgb(224, 224, 224));
                 }
 
-                this.list.Items.Add(control);
-            }
+                return control;
+            };
         }
     }
 }

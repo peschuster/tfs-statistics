@@ -6,7 +6,7 @@
         x:Class="TfsStatisticsWpf.LatestWindow"
         Title="Latest" Height="500" Width="470">
     <Grid>
-        <controls:InfiniteScrollViewer VerticalScrollBarVisibility="Auto">
+        <controls:InfiniteScrollViewer VerticalScrollBarVisibility="Auto" x:Name="scroller">
             <ItemsControl Name="list" />
         </controls:InfiniteScrollViewer>
     </Grid>

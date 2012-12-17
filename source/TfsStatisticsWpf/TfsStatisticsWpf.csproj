@@ -142,7 +142,7 @@
     </Compile>
     <Compile Include="Export\GraphiteExport.cs" />
     <Compile Include="IChangeInfo.cs" />
-    <Compile Include="Controls\InfiniteScrollView.cs" />
+    <Compile Include="Controls\InfiniteScrollViewer.cs" />
     <Compile Include="IPersistentCache.cs" />
     <Compile Include="IUserImageService.cs" />
     <Compile Include="LatestWindow.xaml.cs">

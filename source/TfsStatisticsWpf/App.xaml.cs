@@ -58,5 +58,10 @@ namespace TfsStatisticsWpf
                 return false;
             }
         }
+
+        private void Application_DispatcherUnhandledException_1(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+
+        }
     }
 }
